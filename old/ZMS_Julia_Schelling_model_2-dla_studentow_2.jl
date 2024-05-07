@@ -216,9 +216,29 @@ end
         end
     end
 end
-
 AGENCI[100,2,100]
 
+using StatsBase, DataFrames
+
+dzielnice_counts_df = DataFrame()
+for t in 1:T
+    print(t)
+    to_count = string.(AGENCI[:,1:1,t])
+    counts = countmap(to_count)
+    for key in ["0.0", "1.0", "2.0", "3.0"]
+        if !(key in keys(counts))
+            counts[key] = 0
+        end 
+    end
+    if t == 1
+        dzielnice_counts_df = DataFrame(counts)
+        print(t)
+    else
+        tmp_df = DataFrame(counts)
+        dzielnice_counts_df = vcat(dzielnice_counts_df,tmp_df)
+    end
+end
+dzielnice_counts_df
 
 
 
