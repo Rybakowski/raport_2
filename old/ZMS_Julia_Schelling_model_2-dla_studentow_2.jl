@@ -93,6 +93,7 @@ end
             if AGENCI[n,1,t] == 3
 
                 AGENCI[n,2,t] = AGENCI[n,2,t-1] + 0.1*rand(Pocz_rozk_III)
+                
                 if AGENCI[n,2,t] > AGENCI[n,2,t-1] && AGENCI[n,5,t] == 0
                     #print("tu1")
                    #Szukamy lepszego miejsca
