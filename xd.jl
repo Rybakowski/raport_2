@@ -12,7 +12,7 @@ function schelling_sym(
     θ₂::Float64 = 0.1,
     α₃::Float64 = 5.0,
     θ₃::Float64 = 0.1,
-    T::Int64 = 12 * 40,
+    T::Int64 = 12 * 20,
     przyrost_param::Float64 = 0.1
     )
     # N_param = 0.25
