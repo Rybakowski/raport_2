@@ -12,7 +12,7 @@ function schelling_sym(
     θ₂::Float64 = 0.1,
     α₃::Float64 = 5.0,
     θ₃::Float64 = 0.1,
-    T::Int64 = 12 * 20,
+    T::Int64 = 12 * 40,
     przyrost_param::Float64 = 0.1
     )
     # N_param = 0.25
@@ -165,7 +165,7 @@ function schelling_sym(
                 if AGENCI[n,2,t] > AGENCI[n,2,t-1] && AGENCI[n,5,t] == 0
                    #Szukamy lepszego miejsca
                     #próba = rand(Uniform(AGENCI[n,3,t-1],AGENCI[n,2,t]))
-                    if AGENCI[n,3,t] < P_dolna⁽²⁾
+                    if AGENCI[n,3,t] < P_dolna⁽¹⁾
                         # print("2.1")
                         próba = rand(truncated(Pocz_rozk_II; lower=P_dolna⁽²⁾, upper=P_górna⁽²⁾))
                         AGENCI[n,1,t+1] = 2
@@ -270,6 +270,8 @@ function calc_counts(AGENCI::Array)
             dzielnice_counts_df = vcat(dzielnice_counts_df,tmp_df)
         end
     end
+    dzielnice_counts_df[!,:RowSum] = [sum(row) for row in eachrow(dzielnice_counts_df)];
+    
     rename!(dzielnice_counts_df, Dict(:1 => :district_1));
     rename!(dzielnice_counts_df, Dict(:2 => :district_2));
     rename!(dzielnice_counts_df, Dict(:3 => :district_3));
@@ -277,5 +279,8 @@ function calc_counts(AGENCI::Array)
         percent_change!(dzielnice_counts_df, col)
         # add_log_returns!(dzielnice_counts_df, col)
     end
+    dzielnice_counts_df[!,:district_1_shr] = dzielnice_counts_df[:, :district_1] ./ dzielnice_counts_df[:, :RowSum]
+    dzielnice_counts_df[!,:district_2_shr] = dzielnice_counts_df[:, :district_2] ./ dzielnice_counts_df[:, :RowSum]
+    dzielnice_counts_df[!,:district_3_shr] = dzielnice_counts_df[:, :district_3] ./ dzielnice_counts_df[:, :RowSum]
     return (dzielnice_counts_df)
 end
