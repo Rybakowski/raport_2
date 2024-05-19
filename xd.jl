@@ -13,7 +13,9 @@ function schelling_sym(
     α₃::Float64 = 5.0,
     θ₃::Float64 = 0.1,
     T::Int64 = 12 * 40,
-    przyrost_param::Float64 = 0.1
+    przyrost_param::Float64 = 0.1,
+    CZAS::Int64 = 12*15,
+    P_dolna_2::Int64 = 18000
     )
     # N_param = 0.25
     # bounds_param = 1/1000
@@ -29,11 +31,11 @@ function schelling_sym(
     P_górna⁽²⁾ = round(Int, 25000 * bounds_param)
     P_dolna⁽¹⁾ = round(Int, 23000 * bounds_param)
     P_górna⁽³⁾ = round(Int, 19000 * bounds_param)
-    P_dolna⁽²⁾ = round(Int, 18000 * bounds_param)
+    P_dolna⁽²⁾ = round(Int, P_dolna_2 * bounds_param)
     P_dolna⁽³⁾ = round(Int, 8000 * bounds_param)
 
     # T = 12 * 40 #12 miesięcy - rok, 20 lat
-    CZAS = 12 * 15 #Piętnastoletnie ,,pożyczki" - zablokowanie czasu do szukania nowego mieszkania (można szukać tylko gdy CZASₙ = 0);
+    # CZAS = 12 * 15 #Piętnastoletnie ,,pożyczki" - zablokowanie czasu do szukania nowego mieszkania (można szukać tylko gdy CZASₙ = 0);
 
     #Początkowe rozmieszczenie - przestrzenie trzech dzielnic: ciągłe
     # α₁ = 1 #Współczynnik kształtu - im większy tym ,,chudszy" ogon rozkładu PAreta
